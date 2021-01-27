@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.less'
+import logo from '@src/logo.svg'
+import './style.less';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState(0);
+  console.log(window.global);
   return (
     <div className="App">
       <header className="App-header">

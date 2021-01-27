@@ -1,11 +1,22 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import routes from '@route/index'
 import './index.less'
-import App from './App'
+import App from './pages/home'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Switch>
+        {
+          routes.map((i, n) => {
+            return <Route key={n} {...i}/>
+          })
+        }
+      </Switch>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )
+
