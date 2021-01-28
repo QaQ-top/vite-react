@@ -20,6 +20,10 @@
       "@src/*": ["./src/*"],
       "@pages/*": ["./src/pages/*"],
       "@route/*": ["./src/route/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@models/*": ["./src/assets/*"],
+      "@themes/*": ["./src/assets/*.less","./src/assets/*.css","./src/assets/*"],
+      "@utils/*": ["./src/assets/*"],
     }
   },
   "include": ["./"],

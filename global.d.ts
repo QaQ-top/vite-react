@@ -1,16 +1,8 @@
-
-declare module '*.scss';
-declare module '*.sass'; 
-declare module '*.svg'; 
-declare module '*.png';
-declare module '*.jpg';
-
-
-declare global {
-  interface Window {
-    global: string;
-  }
+declare module '*.wasm' {
+  const wasm: () => Promise<any>;
+  export default wasm
 }
 
-
-export {};
+interface Window {
+  global: string;
+}

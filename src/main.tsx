@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
-import routes from '@route/index'
-import './index.less'
-import App from './pages/home'
+import routes from '@route/index';
+import '@themes/global.less';
+
 
 ReactDOM.render(
   <React.StrictMode>
