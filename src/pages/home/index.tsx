@@ -2,15 +2,23 @@ import React, { useState } from 'react';
 import logo from '@assets/images/logo.svg';
 import Styles from './style.module.less';
 import wags from '@assets/other/app.wasm';
+import config from './index.json';
 
 
 function App() {
   const [count, setCount] = useState(0);
-  window.global
-  // console.log(logo, );
-  wags().catch((err) => {
+  console.log(config, window.v_global);
+  wags({
+    env: {
+      abort: () => {
+        console.log('FFFF')
+      }
+    },
+  }).then(res => {
+    console.log(res.buffer)
+  }).catch((err) => {
     console.log(err)
-  } )
+  });
   return (
     <div className={Styles.App}>
       <header className={Styles.App_header}>

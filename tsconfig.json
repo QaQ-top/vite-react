@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "ES2015"],
     "types": ["vite/client"],
     "allowJs": false,
     "skipLibCheck": false,
@@ -21,9 +21,9 @@
       "@pages/*": ["./src/pages/*"],
       "@route/*": ["./src/route/*"],
       "@assets/*": ["./src/assets/*"],
-      "@models/*": ["./src/assets/*"],
-      "@themes/*": ["./src/assets/*.less","./src/assets/*.css","./src/assets/*"],
-      "@utils/*": ["./src/assets/*"],
+      "@models/*": ["./src/models/*"],
+      "@themes/*": ["./src/themes/*.less","./src/themes/*.css","./src/themes/*"],
+      "@utils/*": ["./src/utils/*"],
     }
   },
   "include": ["./"],

@@ -1,17 +1,20 @@
 import reactRefresh from '@vitejs/plugin-react-refresh'; // react 热更新
-// import resolve from '@vitejs/plugin-node-resolve';
+
+import path from 'path';
 
 import { defineConfig, } from 'vite';
 
+
 // Alias 配置参数
 const root = process.cwd();
-const ceratePath = (path = '') => {
-  return `${root}\\src${path ? `\\${path}` : ''}`;
+const ceratePath = (pathName = '') => {
+  // `${root}\\src${pathName ? `\\${pathName}` : ''}`;
+  return path.resolve(__dirname, `./src${pathName ? `/${pathName}` : ''}`);
 }
 
+console.log(process.env.NODE_ENV)
 
 export default defineConfig({
-
   /**
    * 别名
    * 配合 tsconfig.json 的 compilerOptions.paths 使用
@@ -61,7 +64,7 @@ export default defineConfig({
    * 
    */
   define: {
-    global: '全局变量'
+    v_global: '全局变量' // 全局变量名称 会在 build 时跟 node_modules 内部变量冲突
   },
 
   // 插件  rollup 一样的用法 
@@ -71,7 +74,7 @@ export default defineConfig({
   
   // 项目根目录，可以是绝对路径，一个相对于配置文件本身位置的路径。
   // 默认： process.cwd()
-  root: 'C:\\test\\initvite',
+  root: process.cwd(),
 
   
 
@@ -142,12 +145,13 @@ export default defineConfig({
 
   json: {
     namedExports: true,
-    stringify: true,
+    stringify: false, // stringify: true 无法使用 import { age, name} from './index.json'; 这种 key 导入的方式。
   },
   /**
    * esbuild 集成 "esbuild transform api"。最常见的用例是定制 JSX
    */
   esbuild: {
+    target: 'es2020',
     jsxFactory: 'React.createElement', // dom 标签转换
     jsxFragment: 'React.Fragment',  // <></> 空标签转换
     /**
@@ -224,7 +228,49 @@ export default defineConfig({
   },
 
   build: {
+    /**
+     * 打包后最终 最终的兼容性，变换是通过 esbuild 进行的 和 esbuild.target 配置一样
+     * "modules": 它的目标是支持本地ES模块的浏览器
+     * "esnext": 它只执行最小的 trasnpiling (用于minification compat)，并假定支持本地动态导入。
+     */
+    target: 'es2020',
     
-  }
+    /**
+     * Vite 内部采用的就是原生 Dynamic imports (<script type="module" ></script>) 特性实现的，所以打包结果还是只能够支持现代浏览器
+     * polyfillDynamicImport = true
+     * 也就是说，只要你想，它也可以运行在相对低版本的浏览器中。
+     */
+    polyfillDynamicImport: true,
 
+    /**
+     * 指定打包输出的目录
+     * 默认 dist
+     */
+    outDir: 'dist',
+
+    /**
+     * 指定打包后资源的输出的目录 ( 这是相对于 outDir )
+     */
+    assetsDir: 'assets',
+    
+    /**
+     * 小于 assetsInlineLimit 的内联资源 将转为 Base64
+     * .wasm 文件 将转为字符串
+     */
+    assetsInlineLimit: 4096,
+
+    /**
+     * 开启/关闭 CSS 代码分割。
+     * 当启用时，以async chunk导入的CSS将被内联到async chunk本身，并在加载该chunk时插入。
+     * 如果禁用，整个项目中的所有CSS将被提取到一个CSS文件中。
+     */
+    cssCodeSplit: true,
+
+    /**
+     * 生成生产源图
+     */
+
+
+  },
 });
+
