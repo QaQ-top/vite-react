@@ -8,7 +8,9 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+// 通过动态喜好 判断是否 应用动画
+// IE 不支持
+@media (prefers-reduced-motion: no-preference) { // 如果 浏览器设置了 reduce motion 就应用样式
   .App_logo {
     animation: App_logo_spin infinite 20s linear;
   }

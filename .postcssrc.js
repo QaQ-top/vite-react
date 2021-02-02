@@ -4,8 +4,8 @@ module.exports = {
   plugins: [
     autoprefixer({
       overrideBrowserslist: [
-        "> 1%",
-        "last 5 versions"
+        "last 5 versions",
+        "not ie <= 7"
       ],      
     }),
   ]

@@ -7,7 +7,7 @@ import config from './index.json';
 
 function App() {
   const [count, setCount] = useState(0);
-  console.log(config, window.v_global);
+  console.log(config, __GLOBAL__meaning,);
   wags({
     env: {
       abort: () => {
@@ -26,7 +26,7 @@ function App() {
         <p>Hello Vite + React!</p>
         <p>
           <button onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
+            count is: {count} {__GLOBAL__meaning}
           </button>
         </p>
         <></>
